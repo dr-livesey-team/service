@@ -1,0 +1,16 @@
+.date {
+  min-width: 160px;
+
+  @media (max-width: 1366px) {
+    min-width: auto;
+  }
+}
+
+.review {
+  text-align: center;
+
+  &.active {
+    color: #087FFF;
+    cursor: pointer;
+  }
+}
