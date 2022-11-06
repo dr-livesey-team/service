@@ -60,16 +60,16 @@ export class CustomMap extends React.Component {
                 hasHint: false,
               }}
             >
-              {POINTS.map((point, index) => (
+              {this.props.anomalies.anomalies.map((point) => (
                 <Placemark
-                  key={index}
-                  geometry={[point[0], point[1]]}
+                  key={point.id}
+                  geometry={[point.latitude, point.longitude]}
                   onClick={() => {
                       this.onPlacemarkClick(point);
                       this.props.setActivePoint(point);
                   }}
                   properties={{
-                    item: index,
+                    item: point.id,
                   }}
                   options={{
                     iconLayout: "default#image",

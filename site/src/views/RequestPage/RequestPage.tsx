@@ -1,15 +1,22 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import S from "./requestPage.module.scss";
 import Comment from "./Comment/Comment";
+import axios from "axios";
+import { infoMock, serverURL } from "../../assets/requestMock";
 
-const RequestPage: React.FC = () => {
+const RequestPage: React.FC<{ id: number }> = ({ id }) => {
+  const [requestInfo, setRequestInfo] = useState<any>([]);
+  useEffect(() => {
+    axios
+      .get(serverURL + "info?id=" + id)
+      .then((response) => setRequestInfo(response.data?.requests))
+      .catch(() => setRequestInfo(infoMock));
+  }, []);
   return (
     <div className={S.page__wrapper}>
       <div className={S.header}>
         <div className={S.close}>Назад</div>
-        <h2 className={S.title}>
-            Отсутствие отопления в комнате, квартире
-        </h2>
+        <h2 className={S.title}>Отсутствие отопления в комнате, квартире</h2>
       </div>
       <div className={S.content}>
         <div className={S.info}>
@@ -46,10 +53,10 @@ const RequestPage: React.FC = () => {
                 <th>Описание</th>
                 <th></th>
               </tr>
-              <Comment/>
-              <Comment/>
-              <Comment/>
-              <Comment/>
+              <Comment />
+              <Comment />
+              <Comment />
+              <Comment />
             </table>
           </div>
         </div>

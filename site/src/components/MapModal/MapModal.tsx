@@ -1,19 +1,20 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import S from "./mapModal.module.scss";
 import SearchInput from "../SearchInput/SearchInput";
 import CustomCheckbox from "../CustomCheckbox/CustomCheckbox";
 import CustomMap from "../CustomMap/CustomMap";
 import Request from "../../views/MainPage/RequestBlock/Request/Request";
 
-const MapModal: React.FC<{ setActive: any; setFilterActive: any }> = ({
-  setActive,
-  setFilterActive,
-}) => {
+const MapModal: React.FC<{
+  setActive: any;
+  setFilterActive: any;
+  anomalies: any;
+}> = ({ setActive, setFilterActive, anomalies }) => {
   const [activePoint, setActivePoint] = useState(undefined);
 
   useEffect(() => {
     console.log(activePoint);
-  }, [activePoint])
+  }, [activePoint]);
 
   return (
     <div className={S.modal__wrapper}>
@@ -31,7 +32,7 @@ const MapModal: React.FC<{ setActive: any; setFilterActive: any }> = ({
             <CustomCheckbox>Только аномальные</CustomCheckbox>
           </div>
         </div>
-        <CustomMap setActivePoint={setActivePoint} />
+        <CustomMap anomalies={anomalies} setActivePoint={setActivePoint} />
         <div className={S.requestList}>
           <table className={S.requestBlock}>
             <th className={S.header}>
@@ -39,16 +40,9 @@ const MapModal: React.FC<{ setActive: any; setFilterActive: any }> = ({
               <td>Наименование</td>
               <td>Дата создания</td>
             </th>
-            <Request minRequest={true}/>
-            <Request minRequest={true}/>
-            <Request minRequest={true}/>
-            <Request minRequest={true}/>
-            <Request minRequest={true}/>
-            <Request minRequest={true}/>
-            <Request minRequest={true}/>
-            <Request minRequest={true}/>
-            <Request minRequest={true}/>
-            <Request minRequest={true}/>
+            {anomalies.anomalies.map(() => {
+              <Request minRequest={true} />
+            })}
           </table>
         </div>
       </div>

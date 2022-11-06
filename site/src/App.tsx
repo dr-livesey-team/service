@@ -12,7 +12,7 @@ function App() {
           <Header />
           <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/request/" element={<RequestPage />} />
+          <Route path="/request/" element={<RequestPage id={0} />} />
           <Route path="/statistics/" element={<StatPage />} />
         </Routes>
       </BrowserRouter>
