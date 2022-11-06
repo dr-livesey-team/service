@@ -1,0 +1,49 @@
+{
+  "name": "anomalies",
+  "fields": [
+    {
+      "name": "id",
+      "type": "unsigned"
+    },
+    {
+      "name": "opening_date",
+      "type": "string"
+    },
+    {
+      "name": "closing_date",
+      "type": "string"
+    },
+    {
+      "name": "district_name",
+      "type": "string"
+    },
+    {
+      "name": "address",
+      "type": "string"
+    },
+    {
+      "name": "management_company_name",
+      "type": "string"
+    },
+    {
+      "name": "service_organization_name",
+      "type": "string"
+    },
+    {
+      "name": "urgency_category_name",
+      "type": "string"
+    },
+    {
+      "name": "anomaly_category",
+      "type": "string"
+    },
+    {
+      "name": "latitude",
+      "type": "number"
+    },
+    {
+      "name": "longitude",
+      "type": "number"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "name": "requests",
+  "fields": [
+    {
+      "name": "request_root_identifier",
+      "type": "string"
+    },
+    {
+      "name": "opening_date",
+      "type": "string"
+    },
+    {
+      "name": "closing_date",
+      "type": "string"
+    },
+    {
+      "name": "district_name",
+      "type": "string"
+    },
+    {
+      "name": "address",
+      "type": "string"
+    },
+    {
+      "name": "fault_name",
+      "type": "string"
+    },
+    {
+      "name": "management_company_name",
+      "type": "string"
+    },
+    {
+      "name": "service_organization_name",
+      "type": "string"
+    },
+    {
+      "name": "urgency_category_name",
+      "type": "string"
+    },
+    {
+      "name": "feedback",
+      "type": "string"
+    },
+    {
+      "name": "group_id",
+      "type": "unsigned"
+    }
+  ]
+}
