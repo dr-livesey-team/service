@@ -1,5 +1,5 @@
 {
-  "listen":"0.0.0.0:50050",
+  "listen":"127.0.0.1:50050",
   "pid":"log/main.pid",
   "log":"log/log.txt",
   "rtr": "127.0.0.1:50052"

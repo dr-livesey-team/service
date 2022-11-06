@@ -7,7 +7,7 @@ import pandas as pd
 df = pd.read_csv("results.csv", delimiter='$')
 
 offset = 0
-size = 1000
+size = 100
 timeout = 0.5
 
 for i in range(offset, offset + size):

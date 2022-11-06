@@ -3,8 +3,6 @@
 export PATH=$PATH:/usr/local/go/bin
 
 if [[ "$1" == "start" ]]; then
-    apache2ctl start
-    
     cd service/address_registry
     utils/launcher main
     cd ../../
