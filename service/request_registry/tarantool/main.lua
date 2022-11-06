@@ -56,11 +56,11 @@ function select_anomalies(filters)
                 return true
             end
         )
-        :map(
-            function (tuple)
-                return {tuple.id, tuple.latitude, tuple.longitude}
-            end
-        )
+        -- :map(
+        --     function (tuple)
+        --         return {tuple.id, tuple.latitude, tuple.longitude}
+        --     end
+        -- )
         :totable()
 end
 

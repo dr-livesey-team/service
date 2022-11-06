@@ -26,8 +26,8 @@ const (
 )
 
 const (
-	MinDate string = "0000-01-01"
-	MaxDate string = "9999-12-31"
+	MinDate string = "2021-01-01"
+	MaxDate string = "2021-12-31"
 )
 
 type RequestRegistry struct {
