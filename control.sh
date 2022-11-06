@@ -3,6 +3,8 @@
 export PATH=$PATH:/usr/local/go/bin
 
 if [[ "$1" == "start" ]]; then
+    apache2ctl start
+    
     cd service/address_registry
     utils/launcher main
     cd ../../
@@ -52,8 +54,6 @@ elif [[ "$1" == "init" ]]; then
     cd ../
 
     cp service/request_registry/tarantool/main.lua /etc/tarantool/instances.enabled/main.lua
-
-    apache2ctl start
 elif [[ "$1" == "build" ]]; then
     cd service/address_registry
     make

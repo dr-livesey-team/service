@@ -7,7 +7,7 @@ import pandas as pd
 df = pd.read_csv("results.csv", delimiter='$')
 
 offset = 0
-size = 100
+size = 1000
 timeout = 0.5
 
 for i in range(offset, offset + size):
@@ -36,8 +36,8 @@ for i in range(offset, offset + size):
     buffer += '\n'
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect(("127.0.0.1", 50052))
-    size = s.send(str.encode(buffer))
+    s.connect(("0.0.0.0", 50052))
+    s.send(str.encode(buffer))
     s.close()
     time.sleep(timeout)
 
@@ -69,8 +69,8 @@ for i in range(offset, offset + size):
         buffer += '\n'
 
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.connect(("127.0.0.1", 50052))
-        size = s.send(str.encode(buffer))
+        s.connect(("0.0.0.0", 50052))
+        s.send(str.encode(buffer))
         s.close()
         time.sleep(timeout)
 
@@ -99,7 +99,7 @@ for i in range(offset, offset + size):
         buffer += '\n'
 
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.connect(("127.0.0.1", 50052))
-        size = s.send(str.encode(buffer))
+        s.connect(("0.0.0.0", 50052))
+        s.send(str.encode(buffer))
         s.close()
         time.sleep(timeout)

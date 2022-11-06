@@ -104,8 +104,13 @@ func Process(request *Request) (*Response, error) {
 	}
 	util.Log(util.Debug, "Number of coordinates is %d\n", len(records))
 
-	latitude := records[0].Cells.Data.Coordinates[0][0][1]
-	longitude := records[0].Cells.Data.Coordinates[0][0][0]
+	latitude := float64(0)
+	longitude := float64(0)
+
+	if records[0].Cells.Data.Coordinates != nil {
+		latitude = records[0].Cells.Data.Coordinates[0][0][1]
+		longitude = records[0].Cells.Data.Coordinates[0][0][0]
+	}
 
 	return &Response{Latitude: latitude, Longitude: longitude}, nil
 }

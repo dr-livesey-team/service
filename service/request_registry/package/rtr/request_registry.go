@@ -194,8 +194,6 @@ func (service *RequestRegistry) GetStatistic(filter *Filter) (*Statistic, error)
 }
 
 func (service *RequestRegistry) InsertAnomaly(info *AnomalyInsertInfo) error {
-	util.Log(util.Debug, "SOSAMBA")
-
 	client, err := srv.Dial(service.AddressRegistry)
 	if err != nil {
 		util.LogError(err)
