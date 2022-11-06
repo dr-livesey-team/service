@@ -27,7 +27,7 @@ func NewHandler(config *gtw.Config) *Handler {
 	return &Handler{config.RequestRegistryEndpoint}
 }
 
-func (handler *Handler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {	
+func (handler *Handler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 	writer.Header().Set("Content-Type", "text/html; charset=utf-8")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	writer.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
@@ -36,6 +36,7 @@ func (handler *Handler) ServeHTTP(writer http.ResponseWriter, request *http.Requ
 	 	writer.WriteHeader(http.StatusNoContent)
 	 	return
 	}
+
 	filter := ParseQuery(request.URL.Query())
 
 	client, err := rtr.Dial(handler.RequestRegistryEndpoint)

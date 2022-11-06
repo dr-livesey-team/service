@@ -3,8 +3,8 @@ package rtr
 import "encoding/json"
 
 type Point struct {
-	Percent float32 `json:"percent"`
 	Date    string  `json:"date"`
+	Percent float32 `json:"percent"`
 }
 
 type Statistic struct {
