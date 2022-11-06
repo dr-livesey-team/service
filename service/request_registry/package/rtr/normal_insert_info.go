@@ -5,15 +5,15 @@ import (
 )
 
 type NormalInsertInfo struct {
-	Id 						uint64   `json:"id"`
-	OpeningDate 			string   `json:"opening_date"`
-	ClosingDate 			string   `json:"closing_date"`
-	DistrictName 			string   `json:"district_name"`
-	Address      	        string   `json:"address"`
-	FaultName    		    string   `json:"fault_name"`
-	ManagementCompanyName   string   `json:"management_company_name"`
-	ServiceOrganizationName string   `json:"service_organization_name"`
-	UrgencyCategoryName     string   `json:"urgency_category_name"`
+	Id uint64 `json:"id"`
+	OpeningDate string `json:"opening_date"`
+	ClosingDate string `json:"closing_date"`
+	DistrictName string `json:"district_name"`
+	Address string `json:"address"`
+	FaultName string `json:"fault_name"`
+	ManagementCompanyName string `json:"management_company_name"`
+	ServiceOrganizationName string `json:"service_organization_name"`
+	UrgencyCategoryName string `json:"urgency_category_name"`
 }
 
 func MarshalNormalInsertInfo(info *NormalInsertInfo) ([]byte, error) {

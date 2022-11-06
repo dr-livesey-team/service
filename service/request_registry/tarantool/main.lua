@@ -56,11 +56,6 @@ function select_anomalies(filters)
                 return true
             end
         )
-        -- :map(
-        --     function (tuple)
-        --         return {tuple.id, tuple.latitude, tuple.longitude}
-        --     end
-        -- )
         :totable()
 end
 
@@ -94,10 +89,6 @@ function number_anomalies(filters)
                 end
 
                 if not table_contains(filters.urgency_category_name, tuple.urgency_category_name) then
-                    return false
-                end
-
-                if not table_contains(filters.anomaly_category, tuple.anomaly_category) then
                     return false
                 end
 
@@ -198,7 +189,6 @@ if box.space.anomalies == nil then
         {name = 'management_company_name',   type = 'string'  },
         {name = 'service_organization_name', type = 'string'  },
         {name = 'urgency_category_name',     type = 'string'  },
-        {name = 'anomaly_category',          type = 'string'  },
         {name = 'latitude',                  type = 'number'  },
         {name = 'longitude',                 type = 'number'  }
     })
@@ -268,6 +258,8 @@ if box.space.requests == nil then
         {name = 'management_company_name',   type = 'string'  },
         {name = 'service_organization_name', type = 'string'  },
         {name = 'urgency_category_name',     type = 'string'  },
+        {name = 'anomaly_category',          type = 'unsigned'},
+        {name = 'effectiveness',             type = 'string'  },
         {name = 'feedback',                  type = 'string'  },
         {name = 'group_id',                  type = 'unsigned'}
     })

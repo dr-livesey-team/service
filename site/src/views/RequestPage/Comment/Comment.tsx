@@ -1,15 +1,15 @@
 import React from "react";
 import S from "./comment.module.scss";
 
-const Comment = () => {
+const Comment: React.FC<{item: any}> = ({item}) => {
   return (
     <tr>
-      <td className={S.date}>15:11, 20.10.2021</td>
-      <td>10ч 10мин</td>
-      <td>Выполнено</td>
-      <td>Перезапуск системы</td>
-      <td>В 1 комнате еле теплые батареи, а во 2 комнатее вообще нет тепла</td>
-      <td className={`${S.review} ${S.active}`}>Смотреть отзывы</td>
+      <td>{item?.request_root_identifier}</td>
+      <td className={S.date}>{item?.opening_date?.slice(0, 10)}</td>
+      <td className={S.date}>{item?.closing_date?.slice(0, 10)}</td>
+      <td>{item?.effectiveness}</td>
+      <td>{item?.fault_name}</td>
+      <td className={`${S.review}`}>Смотреть отзывы</td>
     </tr>
   );
 };

@@ -37,7 +37,7 @@ const MapModal: React.FC<{
         <div className={S.requestList}>
           <table className={S.requestBlock}>
             <th className={S.header}>
-              <td>Количество аномальных</td>
+              <td>Количество заявок</td>
               <td>Наименование</td>
               <td>Дата создания</td>
             </th>

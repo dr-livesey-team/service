@@ -22,7 +22,6 @@ const (
 	ManagementCompanyNameKey string = "management_company_name"
 	ServiceOrganizationKey   string = "service_organization_name"
 	UrgencyCategoryNameKey   string = "urgency_category_name"
-	AnomalyCategoryKey       string = "anomaly_category"
 )
 
 const (
@@ -90,7 +89,6 @@ func (service *RequestRegistry) GetAnomalies(filter *Filter) (*AnomalySelectInfo
 				ManagementCompanyNameKey: filter.ManagementCompanyName,
 				ServiceOrganizationKey:   filter.ServiceOrganizationName,
 				UrgencyCategoryNameKey:   filter.UrgencyCategoryName,
-				AnomalyCategoryKey:       filter.AnomalyCategory,
 			},
 		},
 		&infos,
@@ -140,13 +138,12 @@ func (service *RequestRegistry) GetStatistic(filter *Filter) (*Statistic, error)
 			[]interface{}{
 				map[string]interface{}{
 					OpeningDateKey:           filter.OpeningDate,
-					ClosingDateKey:           filter.ClosingDate,
+					ClosingDateKey:           date.NextDate(filter.OpeningDate),
 					DistrictNameKey:          filter.DistrictName,
 					AddressKey:               filter.Address,
 					ManagementCompanyNameKey: filter.ManagementCompanyName,
 					ServiceOrganizationKey:   filter.ServiceOrganizationName,
 					UrgencyCategoryNameKey:   filter.UrgencyCategoryName,
-					AnomalyCategoryKey:       filter.AnomalyCategory,
 				},
 			},
 			&numberAnomalies,
@@ -162,7 +159,7 @@ func (service *RequestRegistry) GetStatistic(filter *Filter) (*Statistic, error)
 			[]interface{}{
 				map[string]interface{}{
 					OpeningDateKey:           filter.OpeningDate,
-					ClosingDateKey:           filter.ClosingDate,
+					ClosingDateKey:           date.NextDate(filter.OpeningDate),
 					DistrictNameKey:          filter.DistrictName,
 					AddressKey:               filter.Address,
 					ManagementCompanyNameKey: filter.ManagementCompanyName,
@@ -177,12 +174,12 @@ func (service *RequestRegistry) GetStatistic(filter *Filter) (*Statistic, error)
 			return nil, err
 		}
 
-		var percent float32
+		var percent uint32
 
 		if numberNormal[0].Value == 0 {
-			percent = float32(0.0)
+			percent = 0
 		} else {
-			percent = float32(numberAnomalies[0].Value) / float32(numberAnomalies[0].Value+numberNormal[0].Value)
+			percent = uint32((100 * numberAnomalies[0].Value) / (numberAnomalies[0].Value + numberNormal[0].Value))
 		}
 
 		points = append(points, Point{Percent: percent, Date: filter.OpeningDate})
@@ -218,7 +215,6 @@ func (service *RequestRegistry) InsertAnomaly(info *AnomalyInsertInfo) error {
 			info.ManagementCompanyName,
 			info.ServiceOrganizationName,
 			info.UrgencyCategoryName,
-			info.AnomalyCategory,
 			info.Latitude,
 			info.Longitude,
 		})
@@ -257,6 +253,8 @@ func (service *RequestRegistry) InsertRequest(info *RequestInsertInfo) error {
 		info.ManagementCompanyName,
 		info.ServiceOrganizationName,
 		info.UrgencyCategoryName,
+		info.AnomalyCategory,
+		info.Effectiveness,
 		info.Feedback,
 		info.GroupId,
 	})

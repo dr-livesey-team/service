@@ -6,7 +6,7 @@ const RequestBlock: React.FC<{anomalies: Array<any>}> = ({anomalies}) => {
         return (
             <table className={S.requestBlock}>
                 <th className={S.header}>
-                    <td>Количество аномалий</td>
+                    <td>Количество заявок</td>
                     <td>Наименование</td>
                     <td>Дата создания</td>
                     <td>Управляющая копания</td>

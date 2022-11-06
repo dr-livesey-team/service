@@ -17,5 +17,8 @@
 main
 launcher
 
+# Aux
+loader
+
 # Tarantool files
 0*

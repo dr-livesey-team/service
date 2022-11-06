@@ -5,17 +5,19 @@ import (
 )
 
 type RequestSelectInfo struct {
-	RequestRootIdentifier     uint64 `json:"request_root_identifier"`
-	OpeningDate  		      string `json:"opening_date"`
-	ClosingDate  		      string `json:"closing_date"`
-	DistrictName 		      string `json:"district_name"`
-	Address      	          string `json:"address"`
-	FaultName    		      string `json:"fault_name"`
-	ManagementCompanyName     string `json:"management_company_name"`
-	ServiceOrganizationName   string `json:"service_organization_name"`
-	UrgencyCategoryName       string `json:"urgency_category_name"`
-	Feedback                  string `json:"feedback"`
-	GroupId					  uint64 `json:"group_id"`
+	RequestRootIdentifier uint64 `json:"request_root_identifier"`
+	OpeningDate string `json:"opening_date"`
+	ClosingDate string `json:"closing_date"`
+	DistrictName string `json:"district_name"`
+	Address string `json:"address"`
+	FaultName string `json:"fault_name"`
+	ManagementCompanyName string `json:"management_company_name"`
+	ServiceOrganizationName string `json:"service_organization_name"`
+	UrgencyCategoryName string `json:"urgency_category_name"`
+	AnomalyCategory uint64 `json:"anomaly_category"`
+	Effectiveness string `json:"effectiveness"`
+	Feedback string `json:"feedback"`
+	GroupId uint64 `json:"group_id"`
 }
 
 func MarshalRequestSelectInfo(info *RequestSelectInfo) ([]byte, error) {

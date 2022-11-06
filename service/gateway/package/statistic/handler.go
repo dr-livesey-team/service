@@ -4,10 +4,19 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/dr-livesey-team/service/service/gateway/package/anomalies"
 	"github.com/dr-livesey-team/service/service/gateway/package/gtw"
 	"github.com/dr-livesey-team/service/service/gateway/package/util"
 	"github.com/dr-livesey-team/service/service/request_registry/package/rtr"
+)
+
+const (
+	OpeningDateKey           string = "opening_date"
+	ClosingDateKey           string = "closing_date"
+	DistrictNameKey          string = "district_name"
+	AddressKey               string = "address"
+	ManagementCompanyNameKey string = "management_company_name"
+	UrgencyCategoryNameKey   string = "urgency_category_name"
+	AnomalyCategoryKey       string = "anomaly_category"
 )
 
 type Handler struct {
@@ -19,6 +28,9 @@ func NewHandler(config *gtw.Config) *Handler {
 }
 
 func (handler *Handler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
+	util.Log(util.Debug, "%s\n", request.URL.RawQuery)
+	util.Log(util.Debug, "%v\n", request.URL.Query())
+
 	writer.Header().Set("Content-Type", "text/html; charset=utf-8")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	writer.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
@@ -55,14 +67,26 @@ func (handler *Handler) ServeHTTP(writer http.ResponseWriter, request *http.Requ
 	}
 }
 
+func Get(values url.Values, key string) []string {
+	if values[key] == nil {
+		return nil
+	}	
+
+	if len(values[key]) == 1 && values[key][0] == "" {
+		return nil
+	} 
+
+	return values[key]
+}
+
 func ParseQuery(values url.Values) *rtr.Filter {
 	return &rtr.Filter{
-		OpeningDate:           values.Get(anomalies.OpeningDateKey),
-		ClosingDate:           values.Get(anomalies.ClosingDateKey),
-		DistrictName:          values[anomalies.DistrictNameKey],
-		Address:               values[anomalies.AddressKey],
-		ManagementCompanyName: values[anomalies.ManagementCompanyNameKey],
-		UrgencyCategoryName:   values[anomalies.UrgencyCategoryNameKey],
-		AnomalyCategory:       values[anomalies.AnomalyCategoryKey],
+		OpeningDate:           values.Get(OpeningDateKey),
+		ClosingDate:           values.Get(ClosingDateKey),
+		DistrictName:          Get(values, DistrictNameKey),
+		Address:               Get(values, AddressKey),
+		ManagementCompanyName: Get(values, ManagementCompanyNameKey),
+		UrgencyCategoryName:   Get(values, UrgencyCategoryNameKey),
+		AnomalyCategory:       Get(values, AnomalyCategoryKey),
 	}
 }

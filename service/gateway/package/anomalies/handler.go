@@ -28,6 +28,8 @@ func NewHandler(config *gtw.Config) *Handler {
 }
 
 func (handler *Handler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
+	util.Log(util.Debug, "%s\n", request.URL.RawQuery)
+
 	writer.Header().Set("Content-Type", "text/html; charset=utf-8")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	writer.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
@@ -64,14 +66,26 @@ func (handler *Handler) ServeHTTP(writer http.ResponseWriter, request *http.Requ
 	}
 }
 
+func Get(values url.Values, key string) []string {
+	if values[key] == nil {
+		return nil
+	}	
+
+	if len(values[key]) == 1 && values[key][0] == "" {
+		return nil
+	} 
+
+	return values[key]
+}
+
 func ParseQuery(values url.Values) *rtr.Filter {
 	return &rtr.Filter{
 		OpeningDate:           values.Get(OpeningDateKey),
 		ClosingDate:           values.Get(ClosingDateKey),
-		DistrictName:          values[DistrictNameKey],
-		Address:               values[AddressKey],
-		ManagementCompanyName: values[ManagementCompanyNameKey],
-		UrgencyCategoryName:   values[UrgencyCategoryNameKey],
-		AnomalyCategory:       values[AnomalyCategoryKey],
+		DistrictName:          Get(values, DistrictNameKey),
+		Address:               Get(values, AddressKey),
+		ManagementCompanyName: Get(values, ManagementCompanyNameKey),
+		UrgencyCategoryName:   Get(values, UrgencyCategoryNameKey),
+		AnomalyCategory:       Get(values, AnomalyCategoryKey),
 	}
 }

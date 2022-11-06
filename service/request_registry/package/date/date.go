@@ -5,7 +5,7 @@ import (
 )
 
 func NextDate(date string) string {
-	year := date[0:4]
+	year := NextYear(date)
 	month, day := NextMonthDay(date)
 
 	return fmt.Sprintf("%c%c%c%c-%c%c-%c%c",
@@ -18,6 +18,42 @@ func NextDate(date string) string {
 		day[0],
 		day[1],
 	)
+}
+
+func NextYear(date string) string {
+	year := date[0:4]
+	month := date[5:7]
+	day := date[8:10]
+
+	if month == "12" && day == "31" {
+		next := map[byte]byte {
+			'1': '2',
+			'2': '3',
+			'3': '4',
+			'4': '5',
+			'5': '6',
+			'6': '7',
+			'7': '8',
+			'8': '9',
+			'9': '0',
+		}
+		
+		if year[0] == '9' && year[1] == '9' && year[2] == '9' {
+			return fmt.Sprintf("%c000", next[year[0]])
+		}
+
+		if year[0] == '9' && year[1] == '9' {
+			return fmt.Sprintf("%c%c00", year[0], next[year[1]])
+		}
+
+		if year[0] == '9' {
+			return fmt.Sprintf("%c%c%c0", year[0], year[1], next[year[2]])
+		}
+
+		return fmt.Sprintf("%c%c%c%c", year[0], year[1], year[2], next[year[3]])
+	}
+	
+	return year
 }
 
 func NextMonthDay(date string) (string, string) {

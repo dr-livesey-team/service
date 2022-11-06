@@ -17,7 +17,6 @@ export class CustomMap extends React.Component {
       iconLayoutTemplate: null,
       map: null,
     };
-    console.log(this.props.anomalies)
   }
 
   clusterIconShape = {

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import S from "./filterModal.module.scss";
 import SearchInput from "../SearchInput/SearchInput";
 import FilterItem from "./FilterItem/FilterItem";
@@ -7,7 +7,8 @@ import {
   anomaly_category_list,
   district_name_list,
   management_company_name_list,
-  service_organization_name_list, urgency_category_list
+  service_organization_name_list,
+  urgency_category_list,
 } from "../../assets/filterLists";
 
 const factorsList = [
@@ -17,13 +18,17 @@ const factorsList = [
   "Дата создания/закрытия заявки",
   "Обслуживающая организация",
   "Категория срочности",
-  "Вид аномалии",
+  // "Вид аномалии",
 ];
 
-const FilterModal: React.FC<{ setActive: any }> = ({ setActive }) => {
+const FilterModal: React.FC<{
+  setActive: any;
+  selectedItems: any;
+  setSelectedItems: any;
+}> = ({ setActive, selectedItems, setSelectedItems }) => {
   const [activeFactor, setActiveFactor] = useState(0);
-  const [actualSearch, setActualSearch] = useState('');
-  const [factorList, setFactorList] = useState<Array<string>>([])
+  const [actualSearch, setActualSearch] = useState("");
+  const [factorList, setFactorList] = useState<Array<string>>([]);
 
   useEffect(() => {
     switch (activeFactor) {
@@ -45,7 +50,9 @@ const FilterModal: React.FC<{ setActive: any }> = ({ setActive }) => {
         setFactorList(anomaly_category_list);
         break;
     }
-  }, [activeFactor])
+  }, [activeFactor]);
+
+  useEffect(() => {}, []);
 
   return (
     <div className={S.modal_wrapper}>
@@ -54,12 +61,29 @@ const FilterModal: React.FC<{ setActive: any }> = ({ setActive }) => {
       </div>
       <div className={S.modal}>
         <div className={S.modal__left}>
-          {activeFactor !== 2 ? <SearchInput actualSearch={actualSearch} setActualSearch={setActualSearch}/> : <></>}
+          {activeFactor !== 2 ? (
+            <SearchInput
+              actualSearch={actualSearch}
+              setActualSearch={setActualSearch}
+            />
+          ) : (
+            <></>
+          )}
           {activeFactor === 2 ? (
             <Calendar />
           ) : (
             <ul className={S.filterList}>
-              {factorList.map((item) => <FilterItem>{item}</FilterItem>)}
+              {factorList.map((item, index) => (
+                <FilterItem
+                  activeFactor={activeFactor}
+                  selectedItems={selectedItems}
+                  index={index}
+                  setSelectedItems={setSelectedItems}
+                  actualSearch={actualSearch}
+                >
+                  {item}
+                </FilterItem>
+              ))}
             </ul>
           )}
         </div>
@@ -81,10 +105,7 @@ const FilterModal: React.FC<{ setActive: any }> = ({ setActive }) => {
           <input
             type="button"
             value="Применить"
-            onClick={() => {
-              setActive(false);
-
-            }}
+            onClick={() => setActive(false)}
           />
         </div>
       </div>

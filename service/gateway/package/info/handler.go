@@ -24,6 +24,8 @@ func NewHandler(config *gtw.Config) *Handler {
 }
 
 func (handler *Handler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
+	util.Log(util.Debug, "%s\n", request.URL.RawQuery)
+
 	writer.Header().Set("Content-Type", "text/html; charset=utf-8")
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	writer.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")

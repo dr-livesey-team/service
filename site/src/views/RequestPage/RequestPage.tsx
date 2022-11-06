@@ -1,47 +1,78 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import S from "./requestPage.module.scss";
 import Comment from "./Comment/Comment";
 import axios from "axios";
 import { infoMock, serverURL } from "../../assets/requestMock";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { anomaly_category_list } from "../../assets/filterLists";
 
 const RequestPage: React.FC = () => {
-  const [requestInfo, setRequestInfo] = useState<any>([]);
+  const [requestInfo, setRequestInfo] = useState<Array<any>>([]);
+  const [date, setDate] = useState<Array<number>>([]);
+  const [buf, setBuf] = useState(0);
   useEffect(() => {
     let loc = document.location.search;
     loc.slice(0, 3);
     axios
-      .get(serverURL + "info?id=" + loc)
-      .then((response) => setRequestInfo(response.data?.requests))
-      .catch(() => setRequestInfo(infoMock));
+      .get(serverURL + "info" + loc)
+      .then((response) => {
+        setRequestInfo(response.data?.requests);
+        setBuf(
+          new Date(
+            parseInt(requestInfo[0]?.closing_date.slice(0, 4)),
+            (parseInt(requestInfo[0]?.closing_date.slice(5, 7)) + 1) % 12,
+            parseInt(requestInfo[0]?.closing_date.slice(8, 10)),
+            parseInt(requestInfo[0]?.closing_date.slice(11, 13)),
+            parseInt(requestInfo[0]?.closing_date.slice(14, 16))
+          ).getTime() -
+            new Date(
+              parseInt(requestInfo[0]?.opening_date.slice(0, 4)),
+              (parseInt(requestInfo[0]?.opening_date.slice(5, 7)) + 1) % 12,
+              parseInt(requestInfo[0]?.opening_date.slice(8, 10)),
+              parseInt(requestInfo[0]?.opening_date.slice(11, 13)),
+              parseInt(requestInfo[0]?.opening_date.slice(14, 16))
+            ).getTime()
+        );
+      })
+      .catch(() => setRequestInfo([infoMock]));
+  }, []);
+  useEffect(() => {
+    setDate([
+      Math.floor(buf / 1000 / 60 / 60 / 24),
+      Math.floor((buf / 1000 / 60 / 60) % 24),
+      Math.floor((buf / 1000 / 60) % 60),
+    ]);
   }, []);
   return (
     <div className={S.page__wrapper}>
       <div className={S.header}>
-        <Link to={'/monitoring'} className={S.close}>Назад</Link>
-        <h2 className={S.title}>Отсутствие отопления в комнате, квартире</h2>
+        <Link to={"/monitoring"} className={S.close}>
+          Назад
+        </Link>
+        <h2 className={S.title}>{requestInfo[0]?.fault_name}</h2>
       </div>
       <div className={S.content}>
         <div className={S.info}>
           <div className={S.info__top}>
             <div className={S.generalInfo}>
               <h2>Описание</h2>
-              <h3>Общее время разрешения ситуации</h3>
-              <p>2д 4ч</p>
+              <h3>Время выполнения</h3>
+              <p>
+                {date[0] || 0}д {date[1] || 0}ч {date[2] || 0}мин
+              </p>
               <h3>Адрес</h3>
-              <p>г. Москва, ул. Мира, 5, кв. 4</p>
+              <p>{requestInfo[0]?.address}</p>
               <h3>Управляющая организация</h3>
-              <p>ГБУ “Жилищник района Теплый стан”</p>
+              <p>{requestInfo[0]?.management_company_name}</p>
               <h3>Обслуживающая организация</h3>
-              <p>ПАО "МОЭК"</p>
+              <p>{requestInfo[0]?.service_organization_name}</p>
             </div>
             <div className={S.abnormalBlock}>
               <h2>Аномалии</h2>
               <ul>
-                <li>Не выполнена с первого раза</li>
-                <li>Негативный комментарий</li>
-                <li>Долгий срок закрытия</li>
-                <li>Долгое закрытие</li>
+                <li>
+                  {anomaly_category_list[requestInfo[0]?.anomaly_category + 1]}
+                </li>
               </ul>
             </div>
           </div>
@@ -49,17 +80,16 @@ const RequestPage: React.FC = () => {
             <h2>История</h2>
             <table>
               <tr>
+                <th>Номер заявки</th>
                 <th>Дата создания</th>
-                <th>Время выполнения</th>
+                <th>Дата закрытия</th>
                 <th>Результативность</th>
-                <th>Вид работ</th>
                 <th>Описание</th>
                 <th></th>
               </tr>
-              <Comment />
-              <Comment />
-              <Comment />
-              <Comment />
+              {requestInfo.map((item, index) => (
+                <Comment item={item} key={index}/>
+              ))}
             </table>
           </div>
         </div>

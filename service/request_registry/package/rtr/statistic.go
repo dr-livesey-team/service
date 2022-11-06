@@ -4,7 +4,7 @@ import "encoding/json"
 
 type Point struct {
 	Date    string  `json:"date"`
-	Percent float32 `json:"percent"`
+	Percent uint32 `json:"percent"`
 }
 
 type Statistic struct {

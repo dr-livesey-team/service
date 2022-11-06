@@ -44,6 +44,7 @@ func (handler *Handler) Handle(conn net.Conn) {
 			return
 		}
 
+		util.Log(util.Debug, "Write message: %s", buffer)
 		err = util.WriteMessage(conn, buffer)
 		if err != nil {
 			util.LogError(err)
@@ -103,7 +104,7 @@ func (handler *Handler) Call(request *Request) (*Response, error) {
 			return nil, err
 		}
 
-		return &Response{Function: GetAnomaliesFunction, Buffer: string(buffer)}, nil
+		return &Response{Function: GetStatisticFunction, Buffer: string(buffer)}, nil
 
 	case InsertAnomalyFunction:
 		info, err := UnmarshalAnomalyInsertInfo([]byte(request.Buffer))
@@ -116,7 +117,7 @@ func (handler *Handler) Call(request *Request) (*Response, error) {
 			return nil, err
 		}
 
-		return &Response{Function: GetAnomaliesFunction, Buffer: ""}, nil
+		return &Response{Function: InsertAnomalyFunction, Buffer: ""}, nil
 	case InsertNormalFunction:
 		info, err := UnmarshalNormalInsertInfo([]byte(request.Buffer))
 		if err != nil {
@@ -128,7 +129,7 @@ func (handler *Handler) Call(request *Request) (*Response, error) {
 			return nil, err
 		}
 
-		return &Response{Function: GetAnomaliesFunction, Buffer: ""}, nil
+		return &Response{Function: InsertNormalFunction, Buffer: ""}, nil
 	case InsertRequestFunction:
 		info, err := UnmarshalRequestInsertInfo([]byte(request.Buffer))
 		if err != nil {
