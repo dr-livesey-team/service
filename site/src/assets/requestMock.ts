@@ -1,4 +1,4 @@
-const serverURL = "api.drliveseyservice.pagekite.me/api/";
+const serverURL = "http://api.drliveseyservice.pagekite.me/api/";
 
 const anomaliesMock = {
   anomalies: [

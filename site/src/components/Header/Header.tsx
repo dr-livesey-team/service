@@ -8,22 +8,22 @@ class Header extends Component {
       <div className={S.header}>
         <div className={S.logo}>Ливси Х</div>
         <div className={S.menu}>
-          <ul>
+          <nav>
             <NavLink
               to="/statistics"
               title="Подраздел"
-              className={(isActive) => (isActive ? S.active : "")}
+              className={({isActive}) => (isActive ? S.active : "")}
             >
               Статистика
             </NavLink>
             <NavLink
               to="/monitoring"
               title="Подраздел"
-              className={(isActive) => (isActive ? S.active : "")}
+              className={({isActive}) => (isActive ? S.active : "")}
             >
               Мониторинг
             </NavLink>
-          </ul>
+          </nav>
         </div>
         <div className={S.profile}>
           <svg

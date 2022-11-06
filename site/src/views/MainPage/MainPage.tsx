@@ -45,7 +45,7 @@ const MainPage = () => {
             Найти на карте
           </div>
         </div>
-        <RequestBlock anomalies={anomalies} />
+        <RequestBlock anomalies={anomalies.filter((item) => item?.fault_name.toLowerCase().includes(actualSearch.toLowerCase()))} />
       </div>
       {filterActive && <FilterModal setActive={setFilterActive} />}
       {mapActive && (

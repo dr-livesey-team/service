@@ -41,7 +41,7 @@ const MapModal: React.FC<{
               <td>Наименование</td>
               <td>Дата создания</td>
             </th>
-            {anomalies.map((item) => (
+            {anomalies.filter((item) => item?.fault_name.toLowerCase().includes(actualSearch.toLowerCase())).map((item) => (
               <Request minRequest={true} anomaly={item} isActive={activePoint?.id === item?.id}/>
             ))}
           </table>
