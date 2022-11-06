@@ -31,25 +31,29 @@ elif [[ "$1" == "stop" ]]; then
     kill -s SIGINT $pid
     tarantoolctl stop main
     cd ../../
-elif [[ "$1" == "setup" ]]; then
+elif [[ "$1" == "init" ]]; then
     cd service/address_registry
-    make setup
+    make init
     make utils
     cd ../../
 
     cd service/gateway
-    make setup
+    make init
     make utils
     cd ../../
 
     cd service/request_registry
-    make setup
+    make init
     make utils
     cd ../../
 
     cd site
     yarn add package.json
     cd ../
+
+    cp service/request_registry/tarantool/main.lua /etc/tarantool/instances.enabled/main.lua
+
+    apache2ctl start
 elif [[ "$1" == "build" ]]; then
     cd service/address_registry
     make
@@ -89,7 +93,7 @@ else
     echo "        stop    stop service work"
     echo ""
     echo "usage:  as build utilite"
-    echo " .      setup   setup workspace"
+    echo " .      init    setup workspace"
     echo "        build   build service"
     echo "        clean   clean up workspace"
 fi

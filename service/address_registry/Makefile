@@ -12,8 +12,8 @@ all: main
 main: $(srcs)
 	go build -a package/main.go
 
-.PHONY: setup
-setup:
+.PHONY: init
+init:
 	mkdir -p log
 
 .PHONY: clean
