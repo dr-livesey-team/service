@@ -5,6 +5,7 @@ ENV DEBIAN_FRONTEND = noninteractive
 
 COPY install_dependences.sh /
 RUN ["/bin/bash", "install_dependences.sh"]
+RUN ["rm", "install_dependences.sh"]
 
 EXPOSE 80
 

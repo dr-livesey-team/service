@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export PATH=$PATH:/usr/local/go/bin
+
 if [[ "$1" == "start" ]]; then
     cd service/address_registry
     utils/launcher main
@@ -29,33 +31,43 @@ elif [[ "$1" == "stop" ]]; then
     kill -s SIGINT $pid
     tarantoolctl stop main
     cd ../../
-elif [[ "$1" == "reload" ]]; then
-    echo "TODO: implement me"
-elif [[ "$1" == "build" ]]; then
+elif [[ "$1" == "setup" ]]; then
     cd service/address_registry
-    make
-    make install
+    make setup
     make utils
     cd ../../
 
     cd service/gateway
-    make
-    make install
+    make setup
     make utils
     cd ../../
 
     cd service/request_registry
-    make
-    make install
+    make setup
     make utils
     cd ../../
 
     cd site
-    yarn install package
+    yarn add package.json
+    cd ../
+elif [[ "$1" == "build" ]]; then
+    cd service/address_registry
+    make
+    cd ../../
+
+    cd service/gateway
+    make
+    cd ../../
+
+    cd service/request_registry
+    make
+    cd ../../
+
+    cd site
     yarn build
     cd build
     cp -r * /var/www/html
-    cd ../ 
+    cd ../
     cd ../
 elif [[ "$1" == "clean" ]]; then
     cd service/address_registry
@@ -75,9 +87,9 @@ else
     echo "usage:  as service control utilite"
     echo "        start   start service work"
     echo "        stop    stop service work"
-    echo "        reload  reload configration files"
     echo ""
     echo "usage:  as build utilite"
+    echo " .      setup   setup workspace"
     echo "        build   build service"
     echo "        clean   clean up workspace"
 fi
