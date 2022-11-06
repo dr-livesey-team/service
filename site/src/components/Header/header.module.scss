@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 40px 0 130px;
-  border-bottom: 1px solid #E2E3E3;
+  border-bottom: 1px solid #e2e3e3;
 }
 
 .logo {
@@ -17,16 +17,20 @@
     display: flex;
     margin: 0;
   }
-  li {
+
+  a {
     display: flex;
     height: 60px;
     margin-right: 35px;
     align-items: center;
-    cursor: pointer;
+    text-decoration: none;
+    &:visited {
+      color: #000;
+    }
 
-    &:hover {
+    &.active {
       font-weight: 700;
-      border-bottom: 2px solid #FF7712;
+      border-bottom: 2px solid #ff7712;
     }
 
     :after {

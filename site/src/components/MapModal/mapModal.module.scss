@@ -23,6 +23,10 @@
       left: -14px;
       top: -8.5px;
     }
+
+    @media (max-width: 1366px) {
+      left: 130px;
+    }
   }
 
   .modal {

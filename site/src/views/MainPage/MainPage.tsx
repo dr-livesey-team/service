@@ -11,13 +11,14 @@ import { anomaliesMock, serverURL } from "../../assets/requestMock";
 const MainPage = () => {
   const [filterActive, setFilterActive] = useState(false);
   const [mapActive, setMapActive] = useState(false);
-  const [anomalies, setAnomalies] = useState({});
+  const [anomalies, setAnomalies] = useState<Array<any>>([]);
+  const [actualSearch, setActualSearch] = useState('');
 
   useEffect(() => {
     axios
       .get(serverURL + "anomalies")
-      .then((response) => setAnomalies(response.data))
-      .catch(() => setAnomalies(anomaliesMock));
+      .then((response) => setAnomalies(response.data?.anomalies))
+      .catch(() => setAnomalies(anomaliesMock.anomalies));
   }, []);
 
   useEffect(() => {
@@ -34,9 +35,8 @@ const MainPage = () => {
           <p className={S.title__count}>3000 шт</p>
         </div>
         <div className={S.header__wrapper}>
-          <SearchInput />
+          <SearchInput actualSearch={actualSearch} setActualSearch={setActualSearch}/>
           <div className={S.sort} onClick={() => setFilterActive(true)}></div>
-          <CustomCheckbox>Только аномальные</CustomCheckbox>
         </div>
       </div>
       <div className={S.content}>
@@ -45,11 +45,11 @@ const MainPage = () => {
             Найти на карте
           </div>
         </div>
-        <RequestBlock />
+        <RequestBlock anomalies={anomalies} />
       </div>
       {filterActive && <FilterModal setActive={setFilterActive} />}
       {mapActive && (
-        <MapModal anomalies={anomalies} setActive={setMapActive} setFilterActive={setFilterActive} />
+        <MapModal anomalies={anomalies} setActive={setMapActive} setFilterActive={setFilterActive} actualSearch={actualSearch} setActualSearch={setActualSearch}/>
       )}
     </div>
   );

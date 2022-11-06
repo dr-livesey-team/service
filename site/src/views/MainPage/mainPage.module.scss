@@ -50,7 +50,8 @@
   &__map {
     height: 172px;
     width: 100%;
-    background-color: #999999;
+    background: url("../../../public/img/map.png") no-repeat;
+    background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;

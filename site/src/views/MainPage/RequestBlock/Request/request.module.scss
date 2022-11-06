@@ -11,6 +11,10 @@
     grid-template-columns: 0.5fr 1fr 1fr;
   }
 
+  &.active {
+    background-color: #F2F8FF;
+  }
+
   td {
     display: -webkit-box;
     -webkit-line-clamp: 2;

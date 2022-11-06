@@ -17,6 +17,7 @@ export class CustomMap extends React.Component {
       iconLayoutTemplate: null,
       map: null,
     };
+    console.log(this.props.anomalies)
   }
 
   clusterIconShape = {
@@ -60,7 +61,7 @@ export class CustomMap extends React.Component {
                 hasHint: false,
               }}
             >
-              {this.props.anomalies.anomalies.map((point) => (
+              {this.props.anomalies.map((point) => (
                 <Placemark
                   key={point.id}
                   geometry={[point.latitude, point.longitude]}

@@ -1,20 +1,28 @@
 import React, { Component } from "react";
 import S from "./header.module.scss";
-import {Link} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 class Header extends Component {
   render() {
     return (
       <div className={S.header}>
-        <div className={S.logo}>Название</div>
+        <div className={S.logo}>Ливси Х</div>
         <div className={S.menu}>
           <ul>
-            <li>
-              <Link to={'/statistics'} title="Подраздел">Статистика</Link>
-            </li>
-            <li>
-              <Link to={'/'} title="Подраздел">Мониторинг</Link>
-            </li>
+            <NavLink
+              to="/statistics"
+              title="Подраздел"
+              className={(isActive) => (isActive ? S.active : "")}
+            >
+              Статистика
+            </NavLink>
+            <NavLink
+              to="/monitoring"
+              title="Подраздел"
+              className={(isActive) => (isActive ? S.active : "")}
+            >
+              Мониторинг
+            </NavLink>
           </ul>
         </div>
         <div className={S.profile}>

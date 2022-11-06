@@ -15,6 +15,7 @@ const factorsList = [
 
 const FilterModal: React.FC<{ setActive: any }> = ({ setActive }) => {
   const [activeFactor, setActiveFactor] = useState(0);
+  const [actualSearch, setActualSearch] = useState('');
 
   return (
     <div className={S.modal_wrapper}>
@@ -23,7 +24,7 @@ const FilterModal: React.FC<{ setActive: any }> = ({ setActive }) => {
       </div>
       <div className={S.modal}>
         <div className={S.modal__left}>
-          {activeFactor !== 3 ? <SearchInput /> : <></>}
+          {activeFactor !== 3 ? <SearchInput actualSearch={actualSearch} setActualSearch={setActualSearch}/> : <></>}
           {activeFactor === 3 ? (
             <Calendar />
           ) : (

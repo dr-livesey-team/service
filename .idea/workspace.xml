@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e61cbd4-0667-4169-a486-415a72714d93" name="Changes" comment="feat: uploaded source code" />
+    <list default="true" id="3e61cbd4-0667-4169-a486-415a72714d93" name="Changes" comment="feat: added requests" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,6 +39,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Stormrage\WebstormProjects\service\site" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Stormrage\WebstormProjects\service\site" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -52,6 +55,7 @@
       <workItem from="1667173059935" duration="308000" />
       <workItem from="1667660483537" duration="592000" />
       <workItem from="1667693167202" duration="66000" />
+      <workItem from="1667697103351" duration="240000" />
     </task>
     <task id="LOCAL-00001" summary="feat: added service interface (first version)">
       <created>1667003826204</created>
@@ -74,7 +78,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667660712259</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat: added requests">
+      <created>1667697204970</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1667697204970</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -95,6 +106,7 @@
     <MESSAGE value="feat: added service interface (first version)" />
     <MESSAGE value="feat: added map page" />
     <MESSAGE value="feat: uploaded source code" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: uploaded source code" />
+    <MESSAGE value="feat: added requests" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: added requests" />
   </component>
 </project>
