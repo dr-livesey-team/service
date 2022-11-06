@@ -49,6 +49,14 @@ elif [[ "$1" == "build" ]]; then
     make install
     make utils
     cd ../../
+
+    cd site
+    yarn install package
+    yarn build
+    cd build
+    cp -r * /var/www/html
+    cd ../ 
+    cd ../
 elif [[ "$1" == "clean" ]]; then
     cd service/address_registry
     make clean
