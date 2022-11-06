@@ -21,6 +21,12 @@
       opacity: 0.5;
       cursor: pointer;
       position: relative;
+      color: #000;
+      text-decoration: none;
+
+      &:visited {
+        color: #000;
+      }
 
       &:before {
         display: inline-block;

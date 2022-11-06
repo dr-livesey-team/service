@@ -3,19 +3,22 @@ import S from "./requestPage.module.scss";
 import Comment from "./Comment/Comment";
 import axios from "axios";
 import { infoMock, serverURL } from "../../assets/requestMock";
+import {Link} from "react-router-dom";
 
-const RequestPage: React.FC<{ id: number }> = ({ id }) => {
+const RequestPage: React.FC = () => {
   const [requestInfo, setRequestInfo] = useState<any>([]);
   useEffect(() => {
+    let loc = document.location.search;
+    loc.slice(0, 3);
     axios
-      .get(serverURL + "info?id=" + id)
+      .get(serverURL + "info?id=" + loc)
       .then((response) => setRequestInfo(response.data?.requests))
       .catch(() => setRequestInfo(infoMock));
   }, []);
   return (
     <div className={S.page__wrapper}>
       <div className={S.header}>
-        <div className={S.close}>Назад</div>
+        <Link to={'/monitoring'} className={S.close}>Назад</Link>
         <h2 className={S.title}>Отсутствие отопления в комнате, квартире</h2>
       </div>
       <div className={S.content}>

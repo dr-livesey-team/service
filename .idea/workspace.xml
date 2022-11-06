@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e61cbd4-0667-4169-a486-415a72714d93" name="Changes" comment="feat: added requests" />
+    <list default="true" id="3e61cbd4-0667-4169-a486-415a72714d93" name="Changes" comment="feat: updated filters and statistic page">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/site/package.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,6 +35,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Stormrage\\AppData\\Local\\JetBrains\\Toolbox\\apps\\WebStorm\\ch-0\\222.4345.14\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -56,6 +60,9 @@
       <workItem from="1667660483537" duration="592000" />
       <workItem from="1667693167202" duration="66000" />
       <workItem from="1667697103351" duration="240000" />
+      <workItem from="1667759445623" duration="254000" />
+      <workItem from="1667759720484" duration="283000" />
+      <workItem from="1667765125216" duration="127000" />
     </task>
     <task id="LOCAL-00001" summary="feat: added service interface (first version)">
       <created>1667003826204</created>
@@ -85,7 +92,21 @@
       <option name="project" value="LOCAL" />
       <updated>1667697204970</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="feat: added requests">
+      <created>1667759592232</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1667759592232</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat: updated filters and statistic page">
+      <created>1667765201059</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1667765201059</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -107,6 +128,7 @@
     <MESSAGE value="feat: added map page" />
     <MESSAGE value="feat: uploaded source code" />
     <MESSAGE value="feat: added requests" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: added requests" />
+    <MESSAGE value="feat: updated filters and statistic page" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: updated filters and statistic page" />
   </component>
 </project>

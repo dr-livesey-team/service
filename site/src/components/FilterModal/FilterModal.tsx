@@ -1,21 +1,51 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import S from "./filterModal.module.scss";
 import SearchInput from "../SearchInput/SearchInput";
 import FilterItem from "./FilterItem/FilterItem";
 import Calendar from "./Calendar/Calendar";
+import {
+  anomaly_category_list,
+  district_name_list,
+  management_company_name_list,
+  service_organization_name_list, urgency_category_list
+} from "../../assets/filterLists";
 
 const factorsList = [
-  "Адрес дома",
+  // "Адрес дома",
   "Управляющая компания",
   "Район",
   "Дата создания/закрытия заявки",
   "Обслуживающая организация",
   "Категория срочности",
+  "Вид аномалии",
 ];
 
 const FilterModal: React.FC<{ setActive: any }> = ({ setActive }) => {
   const [activeFactor, setActiveFactor] = useState(0);
   const [actualSearch, setActualSearch] = useState('');
+  const [factorList, setFactorList] = useState<Array<string>>([])
+
+  useEffect(() => {
+    switch (activeFactor) {
+      case 0:
+        setFactorList(management_company_name_list);
+        break;
+      case 1:
+        setFactorList(district_name_list);
+        break;
+      case 2:
+        break;
+      case 3:
+        setFactorList(service_organization_name_list);
+        break;
+      case 4:
+        setFactorList(urgency_category_list);
+        break;
+      case 5:
+        setFactorList(anomaly_category_list);
+        break;
+    }
+  }, [activeFactor])
 
   return (
     <div className={S.modal_wrapper}>
@@ -24,20 +54,12 @@ const FilterModal: React.FC<{ setActive: any }> = ({ setActive }) => {
       </div>
       <div className={S.modal}>
         <div className={S.modal__left}>
-          {activeFactor !== 3 ? <SearchInput actualSearch={actualSearch} setActualSearch={setActualSearch}/> : <></>}
-          {activeFactor === 3 ? (
+          {activeFactor !== 2 ? <SearchInput actualSearch={actualSearch} setActualSearch={setActualSearch}/> : <></>}
+          {activeFactor === 2 ? (
             <Calendar />
           ) : (
             <ul className={S.filterList}>
-              <FilterItem>Регион</FilterItem>
-              <FilterItem>Регион</FilterItem>
-              <FilterItem>Регион</FilterItem>
-              <FilterItem>Регион</FilterItem>
-              <FilterItem>Регион</FilterItem>
-              <FilterItem>Регион</FilterItem>
-              <FilterItem>Регион</FilterItem>
-              <FilterItem>Регион</FilterItem>
-              <FilterItem>Регион</FilterItem>
+              {factorList.map((item) => <FilterItem>{item}</FilterItem>)}
             </ul>
           )}
         </div>
@@ -59,7 +81,10 @@ const FilterModal: React.FC<{ setActive: any }> = ({ setActive }) => {
           <input
             type="button"
             value="Применить"
-            onClick={() => setActive(false)}
+            onClick={() => {
+              setActive(false);
+
+            }}
           />
         </div>
       </div>

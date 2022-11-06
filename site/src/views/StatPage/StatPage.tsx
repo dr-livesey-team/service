@@ -127,7 +127,7 @@ const StatPage: React.FC = () => {
                     stroke="#ff7300"
                     dot={false}
                   />
-                  <Brush dataKey="date" startIndex={points.length - 40}>
+                  <Brush dataKey="date" startIndex={0}>
                     <AreaChart>
                       <CartesianGrid />
                       <YAxis hide domain={["auto", "auto"]} />

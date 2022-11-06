@@ -6,6 +6,8 @@
   padding: 10px 30px;
   border: 1px solid #D4D9DC;
   height: 60px;
+  text-decoration: none;
+  color: #000;
 
   &.minimal {
     grid-template-columns: 0.5fr 1fr 1fr;
@@ -13,6 +15,10 @@
 
   &.active {
     background-color: #F2F8FF;
+  }
+
+  &:visited {
+    color: #000;
   }
 
   td {
