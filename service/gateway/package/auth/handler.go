@@ -5,7 +5,7 @@ import (
 	"net/url"
 
 	"github.com/dr-livesey-team/service/service/gateway/package/gtw"
-	"github.com/dr-livesey-team/service/service/request_registry/package/util"
+	"github.com/dr-livesey-team/service/service/gateway/package/util"
 )
 
 const (
