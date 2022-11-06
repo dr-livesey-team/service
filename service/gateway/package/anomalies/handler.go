@@ -1,18 +1,19 @@
 package anomalies
 
 import (
-	"github.com/elisfromkirov/service/service/gateway/package/gtw"
-	"github.com/elisfromkirov/service/service/gateway/package/util"
-	"github.com/elisfromkirov/service/service/request_registry/package/rtr"
 	"net/http"
 	"net/url"
+
+	"github.com/dr-livesey-team/service/service/gateway/package/gtw"
+	"github.com/dr-livesey-team/service/service/gateway/package/util"
+	"github.com/dr-livesey-team/service/service/request_registry/package/rtr"
 )
 
 const (
-	OpeningDateKey 	         string = "opening_date"
+	OpeningDateKey           string = "opening_date"
 	ClosingDateKey           string = "closing_date"
-	DistrictNameKey 		 string = "district_name"
-	AddressKey      	     string = "address"
+	DistrictNameKey          string = "district_name"
+	AddressKey               string = "address"
 	ManagementCompanyNameKey string = "management_company_name"
 	UrgencyCategoryNameKey   string = "urgency_category_name"
 	AnomalyCategoryKey       string = "anomaly_category"
@@ -31,7 +32,7 @@ func (handler *Handler) ServeHTTP(writer http.ResponseWriter, request *http.Requ
 
 	client, err := rtr.Dial(handler.RequestRegistryEndpoint)
 	if err != nil {
-		 util.LogError(err)
+		util.LogError(err)
 		return
 	}
 
@@ -56,12 +57,12 @@ func (handler *Handler) ServeHTTP(writer http.ResponseWriter, request *http.Requ
 
 func ParseQuery(values url.Values) *rtr.Filter {
 	return &rtr.Filter{
-		OpeningDate: values.Get(OpeningDateKey),
-		ClosingDate: values.Get(ClosingDateKey),
-		DistrictName: values[DistrictNameKey],
-		Address: values[AddressKey],
+		OpeningDate:           values.Get(OpeningDateKey),
+		ClosingDate:           values.Get(ClosingDateKey),
+		DistrictName:          values[DistrictNameKey],
+		Address:               values[AddressKey],
 		ManagementCompanyName: values[ManagementCompanyNameKey],
-		UrgencyCategoryName: values[UrgencyCategoryNameKey],
-		AnomalyCategory: values[AnomalyCategoryKey],
+		UrgencyCategoryName:   values[UrgencyCategoryNameKey],
+		AnomalyCategory:       values[AnomalyCategoryKey],
 	}
 }

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/elisfromkirov/service/service/request_registry/package/rtr"
-	"github.com/elisfromkirov/service/service/request_registry/package/util"
+	"github.com/dr-livesey-team/service/service/request_registry/package/rtr"
+	"github.com/dr-livesey-team/service/service/request_registry/package/util"
 )
 
 func main() {

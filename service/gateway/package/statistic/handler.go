@@ -1,12 +1,13 @@
 package statistic
 
 import (
-	"github.com/elisfromkirov/service/service/gateway/package/anomalies"
-	"github.com/elisfromkirov/service/service/gateway/package/gtw"
-	"github.com/elisfromkirov/service/service/gateway/package/util"
-	"github.com/elisfromkirov/service/service/request_registry/package/rtr"
 	"net/http"
 	"net/url"
+
+	"github.com/dr-livesey-team/service/service/gateway/package/anomalies"
+	"github.com/dr-livesey-team/service/service/gateway/package/gtw"
+	"github.com/dr-livesey-team/service/service/gateway/package/util"
+	"github.com/dr-livesey-team/service/service/request_registry/package/rtr"
 )
 
 type Handler struct {
@@ -47,12 +48,12 @@ func (handler *Handler) ServeHTTP(writer http.ResponseWriter, request *http.Requ
 
 func ParseQuery(values url.Values) *rtr.Filter {
 	return &rtr.Filter{
-		OpeningDate: values.Get(anomalies.OpeningDateKey),
-		ClosingDate: values.Get(anomalies.ClosingDateKey),
-		DistrictName: values[anomalies.DistrictNameKey],
-		Address: values[anomalies.AddressKey],
+		OpeningDate:           values.Get(anomalies.OpeningDateKey),
+		ClosingDate:           values.Get(anomalies.ClosingDateKey),
+		DistrictName:          values[anomalies.DistrictNameKey],
+		Address:               values[anomalies.AddressKey],
 		ManagementCompanyName: values[anomalies.ManagementCompanyNameKey],
-		UrgencyCategoryName: values[anomalies.UrgencyCategoryNameKey],
-		AnomalyCategory: values[anomalies.AnomalyCategoryKey],
+		UrgencyCategoryName:   values[anomalies.UrgencyCategoryNameKey],
+		AnomalyCategory:       values[anomalies.AnomalyCategoryKey],
 	}
 }

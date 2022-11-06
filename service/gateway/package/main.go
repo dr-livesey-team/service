@@ -1,16 +1,17 @@
 package main
 
 import (
-	"github.com/elisfromkirov/service/service/gateway/package/anomalies"
-	"github.com/elisfromkirov/service/service/gateway/package/auth"
-	"github.com/elisfromkirov/service/service/gateway/package/gtw"
-	"github.com/elisfromkirov/service/service/gateway/package/info"
-	"github.com/elisfromkirov/service/service/gateway/package/statistic"
-	"github.com/elisfromkirov/service/service/gateway/package/util"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"github.com/dr-livesey-team/service/service/gateway/package/anomalies"
+	"github.com/dr-livesey-team/service/service/gateway/package/auth"
+	"github.com/dr-livesey-team/service/service/gateway/package/gtw"
+	"github.com/dr-livesey-team/service/service/gateway/package/info"
+	"github.com/dr-livesey-team/service/service/gateway/package/statistic"
+	"github.com/dr-livesey-team/service/service/gateway/package/util"
 )
 
 const (
@@ -47,5 +48,5 @@ func main() {
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, syscall.SIGINT)
 
-	<- signals
+	<-signals
 }

@@ -2,8 +2,9 @@ package rtr
 
 import (
 	"errors"
-	"github.com/elisfromkirov/service/service/request_registry/package/util"
 	"net"
+
+	"github.com/dr-livesey-team/service/service/request_registry/package/util"
 )
 
 type Handler struct {
@@ -11,9 +12,7 @@ type Handler struct {
 }
 
 func NewHandler(service *RequestRegistry) *Handler {
-	return &Handler{Service:
-		service,
-	}
+	return &Handler{Service: service}
 }
 
 func (handler *Handler) Handle(conn net.Conn) {

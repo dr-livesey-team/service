@@ -1,21 +1,22 @@
 package rtr
 
 import (
-	"github.com/elisfromkirov/service/service/request_registry/package/util"
 	"net"
+
+	"github.com/dr-livesey-team/service/service/request_registry/package/util"
 )
 
 const (
-	GetAnomaliesFunction string = "GetAnomalies"
-	GetRequestsFunction  string = "GetRequests"
-	GetStatisticFunction string = "GetStatistic"
+	GetAnomaliesFunction  string = "GetAnomalies"
+	GetRequestsFunction   string = "GetRequests"
+	GetStatisticFunction  string = "GetStatistic"
 	InsertAnomalyFunction string = "InsertAnomaly"
-	InsertNormalFunction string = "InsertNormal"
+	InsertNormalFunction  string = "InsertNormal"
 	InsertRequestFunction string = "InsertRequest"
 )
 
 type Client struct {
-	Conn net.Conn
+	Conn    net.Conn
 	Service *RequestRegistry
 }
 

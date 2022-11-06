@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/elisfromkirov/service/service/address_registry/package/srv"
-	"github.com/elisfromkirov/service/service/address_registry/package/util"
+	"github.com/dr-livesey-team/service/service/address_registry/package/srv"
+	"github.com/dr-livesey-team/service/service/address_registry/package/util"
 )
 
 func main() {

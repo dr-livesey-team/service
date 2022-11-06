@@ -1,3 +1,3 @@
-module github.com/elisfromkirov/service/service/address_registry
+module github.com/dr-livesey-team/service/service/address_registry
 
-go 1.18
+go 1.19

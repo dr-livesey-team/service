@@ -1,13 +1,14 @@
 package info
 
 import (
-	"github.com/elisfromkirov/service/service/gateway/package/gtw"
-	"github.com/elisfromkirov/service/service/gateway/package/util"
-	"github.com/elisfromkirov/service/service/request_registry/package/rtr"
 	"math"
 	"net/http"
 	"net/url"
 	"strconv"
+
+	"github.com/dr-livesey-team/service/service/gateway/package/gtw"
+	"github.com/dr-livesey-team/service/service/gateway/package/util"
+	"github.com/dr-livesey-team/service/service/request_registry/package/rtr"
 )
 
 const (

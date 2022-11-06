@@ -1,9 +1,11 @@
-module github.com/elisfromkirov/service/service/request_registry
+module github.com/dr-livesey-team/service/service/request_registry
 
-go 1.18
+go 1.19
+
+replace github.com/dr-livesey-team/service/service/address_registry => ../address_registry
 
 require (
-	github.com/elisfromkirov/service/service/address_registry v0.0.0-00010101000000-000000000000
+	github.com/dr-livesey-team/service/service/address_registry v0.0.0-00010101000000-000000000000
 	github.com/tarantool/go-tarantool v1.9.0
 )
 
@@ -19,5 +21,3 @@ require (
 	google.golang.org/appengine v1.6.7 // indirect
 	gopkg.in/vmihailenco/msgpack.v2 v2.9.2 // indirect
 )
-
-replace github.com/elisfromkirov/service/service/address_registry => ../address_registry

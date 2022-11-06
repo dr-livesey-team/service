@@ -6,13 +6,13 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/elisfromkirov/service/service/address_registry/package/util"
+	"github.com/dr-livesey-team/service/service/address_registry/package/util"
 )
 
 type Service struct {
 	Listener net.Listener
-	Conns chan net.Conn
-	Signals chan os.Signal
+	Conns    chan net.Conn
+	Signals  chan os.Signal
 }
 
 func StartService(config *Config) (*Service, error) {
@@ -51,9 +51,9 @@ func (service *Service) ListenAndServe() {
 	go service.Listen()
 	for {
 		select {
-		case conn := <- service.Conns:
+		case conn := <-service.Conns:
 			go Handle(conn)
-		case <- service.Signals:
+		case <-service.Signals:
 			return
 		}
 	}

@@ -6,7 +6,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/elisfromkirov/service/service/request_registry/package/util"
+	"github.com/dr-livesey-team/service/service/request_registry/package/util"
 )
 
 type Server struct {
@@ -49,10 +49,10 @@ func (server *Server) ListenAndServe() {
 	go server.Listen()
 	for {
 		select {
-		case conn := <- server.Conns:
+		case conn := <-server.Conns:
 			handler := NewHandler(server.Service)
 			go handler.Handle(conn)
-		case <- server.Signals:
+		case <-server.Signals:
 			return
 		}
 	}

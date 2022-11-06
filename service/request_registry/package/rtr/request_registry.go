@@ -1,9 +1,9 @@
 package rtr
 
 import (
-	"github.com/elisfromkirov/service/service/address_registry/package/srv"
-	"github.com/elisfromkirov/service/service/request_registry/package/date"
-	"github.com/elisfromkirov/service/service/request_registry/package/util"
+	"github.com/dr-livesey-team/service/service/address_registry/package/srv"
+	"github.com/dr-livesey-team/service/service/request_registry/package/date"
+	"github.com/dr-livesey-team/service/service/request_registry/package/util"
 	"github.com/tarantool/go-tarantool"
 )
 
@@ -15,14 +15,14 @@ const (
 )
 
 const (
-	OpeningDateKey 			 string = "opening_date"
-	ClosingDateKey 			 string = "closing_date"
-	DistrictNameKey 		 string = "district_name"
-    AddressKey 	    	     string = "address"
+	OpeningDateKey           string = "opening_date"
+	ClosingDateKey           string = "closing_date"
+	DistrictNameKey          string = "district_name"
+	AddressKey               string = "address"
 	ManagementCompanyNameKey string = "management_company_name"
 	ServiceOrganizationKey   string = "service_organization_name"
 	UrgencyCategoryNameKey   string = "urgency_category_name"
-	AnomalyCategoryKey 		 string = "anomaly_category"
+	AnomalyCategoryKey       string = "anomaly_category"
 )
 
 const (
@@ -31,10 +31,10 @@ const (
 )
 
 type RequestRegistry struct {
-	Conn      		*tarantool.Connection
-	Requests  		*SpaceDesc
-	Anomalies 		*SpaceDesc
-	Normal    		*SpaceDesc
+	Conn            *tarantool.Connection
+	Requests        *SpaceDesc
+	Anomalies       *SpaceDesc
+	Normal          *SpaceDesc
 	AddressRegistry string
 }
 
@@ -81,20 +81,20 @@ func (service *RequestRegistry) GetAnomalies(filter *Filter) (*AnomalySelectInfo
 	var infos []AnomalySelectInfo
 
 	err := service.Conn.CallTyped(SelectAnomalies,
-			[]interface{}{
-				map[string]interface{}{
-					OpeningDateKey: filter.OpeningDate,
-					ClosingDateKey: filter.ClosingDate,
-					DistrictNameKey: filter.DistrictName,
-					AddressKey: filter.Address,
-					ManagementCompanyNameKey: filter.ManagementCompanyName,
-					ServiceOrganizationKey: filter.ServiceOrganizationName,
-					UrgencyCategoryNameKey: filter.UrgencyCategoryName,
-					AnomalyCategoryKey: filter.AnomalyCategory,
-				},
+		[]interface{}{
+			map[string]interface{}{
+				OpeningDateKey:           filter.OpeningDate,
+				ClosingDateKey:           filter.ClosingDate,
+				DistrictNameKey:          filter.DistrictName,
+				AddressKey:               filter.Address,
+				ManagementCompanyNameKey: filter.ManagementCompanyName,
+				ServiceOrganizationKey:   filter.ServiceOrganizationName,
+				UrgencyCategoryNameKey:   filter.UrgencyCategoryName,
+				AnomalyCategoryKey:       filter.AnomalyCategory,
 			},
-			&infos,
-		)
+		},
+		&infos,
+	)
 	if err != nil {
 		util.LogError(err)
 		return nil, err
@@ -139,14 +139,14 @@ func (service *RequestRegistry) GetStatistic(filter *Filter) (*Statistic, error)
 		err := service.Conn.CallTyped(NumberAnomalies,
 			[]interface{}{
 				map[string]interface{}{
-					OpeningDateKey: filter.OpeningDate,
-					ClosingDateKey: filter.ClosingDate,
-					DistrictNameKey: filter.DistrictName,
-					AddressKey: filter.Address,
+					OpeningDateKey:           filter.OpeningDate,
+					ClosingDateKey:           filter.ClosingDate,
+					DistrictNameKey:          filter.DistrictName,
+					AddressKey:               filter.Address,
 					ManagementCompanyNameKey: filter.ManagementCompanyName,
-					ServiceOrganizationKey: filter.ServiceOrganizationName,
-					UrgencyCategoryNameKey: filter.UrgencyCategoryName,
-					AnomalyCategoryKey: filter.AnomalyCategory,
+					ServiceOrganizationKey:   filter.ServiceOrganizationName,
+					UrgencyCategoryNameKey:   filter.UrgencyCategoryName,
+					AnomalyCategoryKey:       filter.AnomalyCategory,
 				},
 			},
 			&numberAnomalies,
@@ -161,13 +161,13 @@ func (service *RequestRegistry) GetStatistic(filter *Filter) (*Statistic, error)
 		err = service.Conn.CallTyped(NumberNormal,
 			[]interface{}{
 				map[string]interface{}{
-					OpeningDateKey: filter.OpeningDate,
-					ClosingDateKey: filter.ClosingDate,
-					DistrictNameKey: filter.DistrictName,
-					AddressKey: filter.Address,
+					OpeningDateKey:           filter.OpeningDate,
+					ClosingDateKey:           filter.ClosingDate,
+					DistrictNameKey:          filter.DistrictName,
+					AddressKey:               filter.Address,
 					ManagementCompanyNameKey: filter.ManagementCompanyName,
-					ServiceOrganizationKey: filter.ServiceOrganizationName,
-					UrgencyCategoryNameKey: filter.UrgencyCategoryName,
+					ServiceOrganizationKey:   filter.ServiceOrganizationName,
+					UrgencyCategoryNameKey:   filter.UrgencyCategoryName,
 				},
 			},
 			&numberNormal,
@@ -182,7 +182,7 @@ func (service *RequestRegistry) GetStatistic(filter *Filter) (*Statistic, error)
 		if numberNormal[0].Value == 0 {
 			percent = float32(0.0)
 		} else {
-			percent = float32(numberAnomalies[0].Value)/float32(numberAnomalies[0].Value + numberNormal[0].Value)
+			percent = float32(numberAnomalies[0].Value) / float32(numberAnomalies[0].Value+numberNormal[0].Value)
 		}
 
 		points = append(points, Point{Percent: percent, Date: filter.OpeningDate})
@@ -195,7 +195,7 @@ func (service *RequestRegistry) GetStatistic(filter *Filter) (*Statistic, error)
 
 func (service *RequestRegistry) InsertAnomaly(info *AnomalyInsertInfo) error {
 	util.Log(util.Debug, "SOSAMBA")
-	
+
 	client, err := srv.Dial(service.AddressRegistry)
 	if err != nil {
 		util.LogError(err)

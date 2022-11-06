@@ -5,17 +5,18 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/elisfromkirov/service/service/address_registry/package/util"
 	"io/ioutil"
 	"net"
 	"net/http"
 	"strings"
+
+	"github.com/dr-livesey-team/service/service/address_registry/package/util"
 )
 
 const (
-	UrlFmt string = "https://apidata.mos.ru/v1/datasets/60562/rows?$top=1&$filter=Cells/SIMPLE_ADDRESS%%20eq%%20%s&api_key=90dd708a35a983615cdbfaf42515aff9"
+	UrlFmt      string = "https://apidata.mos.ru/v1/datasets/60562/rows?$top=1&$filter=Cells/SIMPLE_ADDRESS%%20eq%%20%s&api_key=90dd708a35a983615cdbfaf42515aff9"
 	ContentType string = "application/json"
-	Body string = "[\"geoData\"]"
+	Body        string = "[\"geoData\"]"
 )
 
 func Handle(conn net.Conn) {
@@ -42,7 +43,7 @@ func Handle(conn net.Conn) {
 			return
 		}
 		util.Log(util.Debug, "Response to marshal is {Latitude: %g, Longitude: %g}\n", response.Latitude, response.Longitude)
-		
+
 		buffer, err = MarshalResponse(response)
 		if err != nil {
 			util.LogError(err)
@@ -71,7 +72,7 @@ func ReadRequest(conn net.Conn) ([]byte, error) {
 
 func WriteResponse(conn net.Conn, buffer []byte) error {
 	writer := bufio.NewWriter(conn)
-	
+
 	_, err := writer.Write(buffer)
 	if err != nil {
 		return err
@@ -109,7 +110,7 @@ func Process(request *Request) (*Response, error) {
 	return &Response{Latitude: latitude, Longitude: longitude}, nil
 }
 
-func PrepareRequestUrl(address string) (string) {
+func PrepareRequestUrl(address string) string {
 	replacer := strings.NewReplacer(" ", "%20")
 	return fmt.Sprintf(UrlFmt, replacer.Replace(address))
 }
@@ -135,7 +136,7 @@ func PerformRequest(url string) ([]byte, error) {
 
 type GeoData struct {
 	Coordinates [][][]float64 `json:"coordinates"`
-	Shape string `json:"type"`
+	Shape       string        `json:"type"`
 }
 
 type Cells struct {
@@ -143,9 +144,9 @@ type Cells struct {
 }
 
 type Record struct {
-	GlobalId int `json:"global_id"`
-	Number int `json:"Number"`
-	Cells Cells `json:"Cells"`
+	GlobalId int   `json:"global_id"`
+	Number   int   `json:"Number"`
+	Cells    Cells `json:"Cells"`
 }
 
 func Unmarshal(body []byte) ([]Record, error) {
