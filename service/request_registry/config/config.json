@@ -1,0 +1,12 @@
+{
+  "listen":"127.0.0.1:50052",
+  "pid":"log/main.pid",
+  "log":"log/log.txt",
+  "user": "admin",
+  "pass": "passwd",
+  "database": "127.0.0.1:3301",
+  "requests": "spaces/requests.json",
+  "anomalies": "spaces/anomalies.json",
+  "normal": "spaces/normal.json",
+  "adr": "127.0.0.1:50051"
+}

@@ -1,5 +1,21 @@
-# visual studio code settings
+# JetBrains settings directory
+.idea
+
+# Visual Studio Code settings derectory
 .vscode
 
-# mac os files
+# Log directory
+**/log
+
+# Virtual python environment
+/venv
+
+# MacOS specific files
 .DS_Store
+
+# Executable files
+main
+launcher
+
+# Tarantool files
+0*
